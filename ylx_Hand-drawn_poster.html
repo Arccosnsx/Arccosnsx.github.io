@@ -1,214 +1,332 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音频播放器</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: #333;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            color: white;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .audio-player {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            padding: 25px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .audio-player:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .player-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .player-icon {
-            width: 50px;
-            height: 50px;
-            background: #6e8efb;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
-        
-        .player-icon i {
-            color: white;
-            font-size: 20px;
-        }
-        
-        .player-title {
-            font-size: 1.5rem;
-            color: #444;
-        }
-        
-        .audio-container {
-            width: 100%;
-        }
-        
-        audio {
-            width: 100%;
-            height: 50px;
-            outline: none;
-            border-radius: 30px;
-        }
-        
-        .audio-source {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #777;
-            word-break: break-all;
-        }
-        
-        .audio-source a {
-            color: #6e8efb;
-            text-decoration: none;
-        }
-        
-        .audio-source a:hover {
-            text-decoration: underline;
-        }
-        
-        .instructions {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .instructions h2 {
-            color: #6e8efb;
-            margin-bottom: 15px;
-        }
-        
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            color: white;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>叶玲汐手抄报音频播放器</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
-            
-            .audio-player {
+
+            body {
+                background: linear-gradient(135deg, #6e8efb, #a777e3);
+                color: #333;
+                min-height: 100vh;
                 padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
-            
+
+            .container {
+                width: 100%;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+
+            header {
+                text-align: center;
+                margin-bottom: 40px;
+                padding: 20px;
+                color: white;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 10px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+                opacity: 0.9;
+            }
+
+            .audio-player {
+                background: rgba(255, 255, 255, 0.95);
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                padding: 25px;
+                margin-bottom: 25px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .audio-player:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            }
+
+            .player-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .player-icon {
+                width: 50px;
+                height: 50px;
+                background: #6e8efb;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+            }
+
+            .player-icon i {
+                color: white;
+                font-size: 20px;
+            }
+
             .player-title {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
+                color: #444;
+                flex-grow: 1;
             }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>叶玲汐手抄报音频播放器
-            </h1>
-        </header>
-        
-        <div class="audio-player">
-            <div class="player-header">
-                <div class="player-icon">
-                    <i class="fas fa-music"></i>
+
+            .audio-container {
+                width: 100%;
+            }
+
+            audio {
+                width: 100%;
+                height: 50px;
+                outline: none;
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+
+            .player-controls {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 15px;
+            }
+
+            .reload-btn {
+                background: #6e8efb;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 20px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                transition: background 0.3s ease;
+            }
+
+            .reload-btn:hover {
+                background: #5a7de0;
+            }
+
+            .reload-btn i {
+                margin-right: 5px;
+            }
+
+            .audio-source {
+                font-size: 0.9rem;
+                color: #777;
+                word-break: break-all;
+                flex-grow: 1;
+                margin-right: 15px;
+            }
+
+            .audio-source a {
+                color: #6e8efb;
+                text-decoration: none;
+            }
+
+            .audio-source a:hover {
+                text-decoration: underline;
+            }
+
+            .loading {
+                display: none;
+                color: #6e8efb;
+                font-size: 0.9rem;
+                margin-top: 10px;
+            }
+
+            .loading i {
+                animation: spin 1s linear infinite;
+                margin-right: 5px;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .instructions {
+                background: white;
+                border-radius: 15px;
+                padding: 25px;
+                margin-top: 20px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .instructions h2 {
+                color: #6e8efb;
+                margin-bottom: 15px;
+            }
+
+            footer {
+                margin-top: 40px;
+                text-align: center;
+                color: white;
+                opacity: 0.8;
+                font-size: 0.9rem;
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 2rem;
+                }
+
+                .audio-player {
+                    padding: 20px;
+                }
+
+                .player-title {
+                    font-size: 1.3rem;
+                }
+
+                .player-controls {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .audio-source {
+                    margin-bottom: 10px;
+                    margin-right: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1>叶玲汐手抄报音频播放器</h1>
+                <p class="subtitle">如果无法播放，请刷新或检查网络配置</p>
+            </header>
+
+            <div class="audio-player" id="player1">
+                <div class="player-header">
+                    <div class="player-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h2 class="player-title">音频 1</h2>
                 </div>
-                <h2 class="player-title">手抄报音频 1</h2>
-            </div>
-            <div class="audio-container">
-                <audio controls>
-                    <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%201.m4a?raw=true" type="audio/mpeg">
-                    您的浏览器不支持音频播放功能。
-                </audio>
-                </p>
-            </div>
-        </div>
-        
-        <div class="audio-player">
-            <div class="player-header">
-                <div class="player-icon">
-                    <i class="fas fa-headphones"></i>
+                <div class="audio-container">
+                    <audio id="audio1" controls>
+                        <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%201.m4a?raw=true" type="audio/mpeg">
+                        您的浏览器不支持音频播放功能。
+                    </audio>
+                    <div class="loading" id="loading1">
+                        <i class="fas fa-spinner"></i> 重新加载音频中...
+                    </div>
+                    <div class="player-controls">
+                        <button class="reload-btn" onclick="reloadAudio('audio1', 'loading1')">
+                            <i class="fas fa-redo"></i> 重新加载
+                        </button>
+                    </div>
                 </div>
-                <h2 class="player-title">手抄报音频 2</h2>
             </div>
-            <div class="audio-container">
-                <audio controls>
-                    <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%202.m4a?raw=true" type="audio/mpeg">
-                    您的浏览器不支持音频播放功能。
-                </audio>
-                </p>
-            </div>
-        </div>
-        
-        <div class="audio-player">
-            <div class="player-header">
-                <div class="player-icon">
-                    <i class="fas fa-play-circle"></i>
+
+            <div class="audio-player" id="player2">
+                <div class="player-header">
+                    <div class="player-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h2 class="player-title">音频 2</h2>
                 </div>
-                <h2 class="player-title">手抄报音频 3</h2>
+                <div class="audio-container">
+                    <audio id="audio2" controls>
+                        <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%202.m4a?raw=true" type="audio/mpeg">
+                        您的浏览器不支持音频播放功能。
+                    </audio>
+                    <div class="loading" id="loading2">
+                        <i class="fas fa-spinner"></i> 重新加载音频中...
+                    </div>
+                    <div class="player-controls">
+                        <button class="reload-btn" onclick="reloadAudio('audio2', 'loading2')">
+                            <i class="fas fa-redo"></i> 重新加载
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="audio-container">
-                <audio controls>
-                    <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%203.m4a?raw=true" type="audio/mpeg">
-                    您的浏览器不支持音频播放功能。
-                </audio>
-                </p>
+
+            <div class="audio-player" id="player3">
+                <div class="player-header">
+                    <div class="player-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h2 class="player-title">音频 3</h2>
+                </div>
+                <div class="audio-container">
+                    <audio id="audio3" controls>
+                        <source src="https://github.com/Arccosnsx/Arccosnsx.github.io/blob/main/%E6%96%B0%E5%BD%95%E9%9F%B3%203.m4a?raw=true" type="audio/mpeg">
+                        您的浏览器不支持音频播放功能。
+                    </audio>
+                    <div class="loading" id="loading3">
+                        <i class="fas fa-spinner"></i> 重新加载音频中...
+                    </div>
+                    <div class="player-controls">
+                        <button class="reload-btn" onclick="reloadAudio('audio3', 'loading3')">
+                            <i class="fas fa-redo"></i> 重新加载
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <footer>
-            <p>© 2025 手抄报音频播放器 | nsx 设计</p>
-        </footer>
-    </div>
-</body>
+
+        <script>
+            function reloadAudio(audioId, loadingId) {
+                const audio = document.getElementById(audioId);
+                const loading = document.getElementById(loadingId);
+                const source = audio.querySelector('source');
+                const originalSrc = source.src;
+
+                // 显示加载状态
+                loading.style.display = 'block';
+
+                // 先暂停音频
+                audio.pause();
+
+                // 通过更改src并重新加载来刷新音频
+                source.src = '';
+                audio.load();
+
+                // 添加一个小延迟，然后重新设置源
+                setTimeout(() => {
+                    source.src = originalSrc;
+                    audio.load();
+
+                    // 隐藏加载状态
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 500);
+                }, 300);
+            }
+
+            // 添加音频加载事件监听器
+            document.querySelectorAll('audio').forEach(audio => {
+                audio.addEventListener('loadstart', function () {
+                    // 可以在这里添加额外的加载处理
+                });
+            });
+        </script>
+    </body>
+
 </html>
